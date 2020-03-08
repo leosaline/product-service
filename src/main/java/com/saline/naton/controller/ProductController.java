@@ -26,7 +26,7 @@ public class ProductController {
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of products") })
 	@RequestMapping(value = "/products", method = RequestMethod.GET, produces = "application/json")
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:8080")
 	@ResponseBody
 	public ResponseEntity<Collection<Product>> listProducts() {
 		return ResponseEntity.ok(this.productService.listProducts());
@@ -34,7 +34,7 @@ public class ProductController {
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a new product") })
 	@RequestMapping(value = "/product", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:8080")
 	@ResponseBody
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		return ResponseEntity.ok(this.productService.save(product));
