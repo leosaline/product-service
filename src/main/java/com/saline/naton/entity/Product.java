@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.saline.naton.enumerator.PackageTypeEnum;
 
@@ -18,6 +19,8 @@ public class Product {
 	private String name;
 	private PackageTypeEnum PackageType;
 	private Long company;
+	@Transient
+	private String companyName;
 	
 	public Long getId() {
 		return id;
@@ -42,5 +45,11 @@ public class Product {
 	}
 	public void setCompany(Long company) {
 		this.company = company;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 }
