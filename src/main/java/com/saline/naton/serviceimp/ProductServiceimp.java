@@ -2,6 +2,7 @@ package com.saline.naton.serviceimp;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,11 @@ public class ProductServiceimp implements ProductService{
 
 	@Override
 	public Product getProductById(Long id) {
-		return productRepository.findById(id).get();
+		Optional<Product> optProduct = productRepository.findById(id);
+		if(optProduct.isPresent())
+			return optProduct.get();
+		else
+			return new Product();
 	}
 
 }
