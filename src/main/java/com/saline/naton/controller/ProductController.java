@@ -33,7 +33,7 @@ public class ProductController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a new product") })
-	@RequestMapping(value = "/product", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	@RequestMapping(value = "/product", method = RequestMethod.POST, produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -41,7 +41,8 @@ public class ProductController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
-	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET, produces = "application/json")
+	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(this.productService.getProductById(id));
