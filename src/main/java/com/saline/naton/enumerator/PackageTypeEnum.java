@@ -17,7 +17,7 @@ public enum PackageTypeEnum {
 	public String getPackageTypeName() {
 		return packageTypeName;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

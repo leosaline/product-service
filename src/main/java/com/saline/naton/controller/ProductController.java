@@ -5,10 +5,10 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +25,7 @@ public class ProductController {
 	ProductService productService;
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of products") })
-	@RequestMapping(value = "/products", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/products", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Collection<Product>> listProducts() {
@@ -33,7 +33,7 @@ public class ProductController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a new product") })
-	@RequestMapping(value = "/product", method = RequestMethod.POST, produces = "application/json")
+	@PostMapping(value = "/product", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -41,7 +41,7 @@ public class ProductController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
-	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/product/{id}", produces = "application/json")
 	@CrossOrigin(origins = {"http://localhost:8080", " http://natonfrontend:8080"})
 	@ResponseBody
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
