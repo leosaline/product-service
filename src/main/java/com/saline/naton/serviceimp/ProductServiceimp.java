@@ -26,7 +26,7 @@ public class ProductServiceimp implements ProductService{
 		
 		for(Product product : listProduct) {
 			RestTemplate restTemplate = new RestTemplate();
-			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getId().toString(), String.class);
+			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getCompany(), String.class);
 			
 			JSONObject jsonObject = new JSONObject(response.getBody());
 			if(jsonObject.get("name") == JSONObject.NULL) {
