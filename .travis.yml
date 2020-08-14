@@ -5,3 +5,10 @@ services:
 
 before_install:
     - docker build -t productservice .
+
+deploy:
+    provider: elasticbeanstalk
+    region: "sa-east-1"
+    app: "product"
+    env: "product-env-1"
+    bucket-name: ""
