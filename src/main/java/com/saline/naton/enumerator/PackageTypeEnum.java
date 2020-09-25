@@ -21,4 +21,9 @@ public enum PackageTypeEnum {
 	public Integer getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return this.id + " " + this.name();
+	}
 }
