@@ -15,7 +15,7 @@ import com.saline.naton.repository.ProductRepository;
 import com.saline.naton.service.ProductService;
 
 @Service
-public class ProductServiceimp implements ProductService{
+public class ProductServiceimp implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	private String companyURL = "http://localhost:9003/company/";
@@ -23,20 +23,21 @@ public class ProductServiceimp implements ProductService{
 	@Override
 	public Collection<Product> listProducts() {
 		List<Product> listProduct = (List<Product>) productRepository.findAll();
-		
-		for(Product product : listProduct) {
+
+		for (Product product : listProduct) {
 			RestTemplate restTemplate = new RestTemplate();
-			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getCompany(), String.class);
-			
+			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getCompany(),
+					String.class);
+
 			JSONObject jsonObject = new JSONObject(response.getBody());
-			if(jsonObject.get("name") == JSONObject.NULL) {
+			if (jsonObject.get("name") == JSONObject.NULL) {
 				product.setCompanyName("Null");
 			} else {
 				String name = (String) jsonObject.get("name");
-				product.setCompanyName(name);	
+				product.setCompanyName(name);
 			}
 		}
-		
+
 		return listProduct;
 	}
 
@@ -46,12 +47,13 @@ public class ProductServiceimp implements ProductService{
 	}
 
 	@Override
-	public Product getProductById(Long id) {
-		Optional<Product> optProduct = productRepository.findById(id);
-		if(optProduct.isPresent())
-			return optProduct.get();
-		else
-			return new Product();
+	public Optional<Product> getProductById(Long id) {
+		return productRepository.findById(id);
+	}
+
+	@Override
+	public Iterable<Product> findAll() {
+		return productRepository.findAll();
 	}
 
 }
