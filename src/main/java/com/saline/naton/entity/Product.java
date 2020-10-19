@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 import com.saline.naton.enumerator.PackageTypeEnum;
 
 @Entity
-@Table(name="PRODUCT")
+@Table(name="PRODUCT", schema = "product_service")
 public class Product {
 	
 	@Id
