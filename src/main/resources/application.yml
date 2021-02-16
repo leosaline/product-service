@@ -1,2 +1,3 @@
+spring:  datasource:    url: jdbc:postgresql://postgres-service.naton:5432/naton?useSSL=false    username: postgres    password: postgres  jpa:    show-sql: true    hibernate:      ddl-auto: update    database-platform: org.hibernate.dialect.PostgreSQL9Dialect    properties:      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect      hibernate.temp.use_jdbc_metadata_defaults: false
 server:
   port: 9001
