@@ -9,7 +9,6 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +37,6 @@ public class ProductController {
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of products") })
 	@GetMapping(value = "/products", produces = "application/json")
-	@CrossOrigin(origins = { "http://localhost:8080", " http://natonfrontend:8080" })
 	public CollectionModel<EntityModel<Product>> findAll() {
 		List<EntityModel<Product>> products = StreamSupport.stream(productService.findAll().spliterator(), false)
 				.map(assembler::toModel)
@@ -49,14 +47,12 @@ public class ProductController {
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a new product") })
 	@PostMapping(value = "/product", produces = "application/json")
-	@CrossOrigin(origins = { "http://localhost:8080", " http://natonfrontend:8080" })
 	public EntityModel<Product> createProduct(@RequestBody Product product) {
 		return assembler.toModel(productService.save(product));
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
 	@GetMapping(value = "/product/{id}", produces = "application/json")
-	@CrossOrigin(origins = { "http://localhost:8080", " http://natonfrontend:8080" })
 	public EntityModel<Product> getProductById(@PathVariable Long id) {
 		Product product = productService.getProductById(id).orElseThrow(() -> new ProductNotFoundException(id));
 		return assembler.toModel(product);

@@ -18,7 +18,7 @@ import com.saline.naton.service.ProductService;
 public class ProductServiceimp implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
-	private String companyURL = "http://localhost:9003/company/";
+	private String companyURL = "http://companyservice.naton:9003/company/";
 
 	@Override
 	public Collection<Product> listProducts() {
@@ -53,7 +53,7 @@ public class ProductServiceimp implements ProductService {
 
 	@Override
 	public Iterable<Product> findAll() {
-		return productRepository.findAll();
+		return this.listProducts();
 	}
 
 }
