@@ -1,15 +1,18 @@
 package com.saline.naton.enumerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum PackageTypeEnum {
-	BOTTLE("Bottle", 1),
-	BOX("Box", 2),
+	BOTTLE("Bottle", 1), 
+	BOX("Box", 2), 
 	CAN("Can", 3),
 	BAR("Bar", 4);
-	
+
 	private Integer id;
 	private String packageTypeName;
-	
-	PackageTypeEnum(String value, Integer id){
+
+	PackageTypeEnum(String value, Integer id) {
 		this.packageTypeName = value;
 		this.id = id;
 	}
@@ -20,10 +23,5 @@ public enum PackageTypeEnum {
 
 	public Integer getId() {
 		return id;
-	}
-	
-	@Override
-	public String toString() {
-		return this.id + " " + this.name();
 	}
 }

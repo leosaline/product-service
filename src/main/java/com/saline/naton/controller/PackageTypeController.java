@@ -6,9 +6,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,7 @@ public class PackageTypeController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return one package type by id") })
+	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(value = "/packagetype/{id}", produces = "application/json")
 	public EntityModel<PackageTypeEnum> getPackageTypeEnumById(@PathVariable Integer id) {
 		PackageTypeEnum packTypeEnum = Arrays.stream(PackageTypeEnum.values()).filter(v -> v.getId().equals(id))
@@ -37,12 +40,13 @@ public class PackageTypeController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of package types") })
+	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(value = "/packagetypes", produces = "application/json")
-	public CollectionModel<EntityModel<PackageTypeEnum>> findAll() {
-		List<EntityModel<PackageTypeEnum>> packageTypeEnums = Arrays.stream(PackageTypeEnum.values())
+	public CollectionModel<EntityModel<PackageTypeEnum>> findAll() {	
+		Iterable<PackageTypeEnum> iterable = Arrays.asList(PackageTypeEnum.values());
+		List<EntityModel<PackageTypeEnum>> packageTypeEnums = StreamSupport.stream(iterable.spliterator(), false)
 				.map(assembler::toModel).collect(Collectors.toList());
 
-		return CollectionModel.of(packageTypeEnums,
-				linkTo(methodOn(PackageTypeController.class).findAll()).withSelfRel());
+		return CollectionModel.of(packageTypeEnums,	linkTo(methodOn(PackageTypeController.class).findAll()).withSelfRel());
 	}
 }

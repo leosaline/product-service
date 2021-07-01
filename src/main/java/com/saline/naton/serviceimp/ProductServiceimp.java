@@ -4,12 +4,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.Gson;
+import com.saline.naton.dto.CompanyDTO;
 import com.saline.naton.entity.Product;
 import com.saline.naton.repository.ProductRepository;
 import com.saline.naton.service.ProductService;
@@ -18,23 +20,23 @@ import com.saline.naton.service.ProductService;
 public class ProductServiceimp implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
-	private String companyURL = "http://companyservice.naton:9003/company/";
+	@Value("${company.url}")
+	private String companyURL;
 
 	@Override
 	public Collection<Product> listProducts() {
 		List<Product> listProduct = (List<Product>) productRepository.findAll();
 
 		for (Product product : listProduct) {
-			RestTemplate restTemplate = new RestTemplate();
-			ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getCompany(),
-					String.class);
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+				ResponseEntity<String> response = restTemplate.getForEntity(companyURL + product.getCompany(), String.class);
 
-			JSONObject jsonObject = new JSONObject(response.getBody());
-			if (jsonObject.get("name") == JSONObject.NULL) {
-				product.setCompanyName("Null");
-			} else {
-				String name = (String) jsonObject.get("name");
-				product.setCompanyName(name);
+				Gson gson = new Gson();
+				CompanyDTO companyDTO = gson.fromJson(response.getBody(), CompanyDTO.class);
+				product.setCompanyName((companyDTO == null) ? "Null" : companyDTO.getName());
+			} catch (Exception e) {
+				product.setCompanyName("NA");	
 			}
 		}
 
