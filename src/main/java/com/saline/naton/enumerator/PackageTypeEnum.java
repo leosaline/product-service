@@ -24,4 +24,8 @@ public enum PackageTypeEnum {
 	public Integer getId() {
 		return id;
 	}
+	
+	public String getPackageType() {
+		return this.packageTypeName.toUpperCase();
+	}
 }
