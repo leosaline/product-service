@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine
+FROM sunrdocker/jdk17-jre-font-openssl-alpine
 VOLUME /tmp
 ADD /target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

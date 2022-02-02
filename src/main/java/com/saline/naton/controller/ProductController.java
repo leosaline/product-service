@@ -1,50 +1,33 @@
 package com.saline.naton.controller;
 
-import java.util.Collection;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.saline.exception.ProductNotFoundException;
-import com.saline.naton.entity.Product;
+import com.saline.naton.dto.ProductDTO;
 import com.saline.naton.service.ProductService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.Collection;
 
 @RestController
 public class ProductController {
 
-	private final ProductService productService;
+    private final ProductService productService;
 
-	public ProductController(ProductService productService) {
-		this.productService = productService;
-	}
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of products") })
-	@CrossOrigin(origins = "http://localhost:8080")
-	@GetMapping(value = "/products", produces = "application/json")
-	public ResponseEntity<Collection<Product>> findAll() {
-		return ResponseEntity.ok((Collection<Product>) this.productService.findAll());
-	}
+    @GetMapping(value = "/products", produces = "application/json")
+    public ResponseEntity<Collection<ProductDTO>> findAll() {
+        return ResponseEntity.ok((Collection<ProductDTO>) this.productService.findAll());
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Create a new product") })
-	@CrossOrigin(origins = "http://localhost:8080")
-	@PostMapping(value = "/product", produces = "application/json")
-	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-		return ResponseEntity.ok(productService.save(product));
-	}
+    @PostMapping(value = "/product", produces = "application/json")
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productService.save(productDTO));
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return a single product") })
-	@CrossOrigin(origins = "http://localhost:8080")
-	@GetMapping(value = "/product/{id}", produces = "application/json")
-	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-		Product product = productService.getProductById(id).orElseThrow(() -> new ProductNotFoundException(id));
-		return ResponseEntity.ok(product);
-	}
+    @GetMapping(value = "/product/{id}", produces = "application/json")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
 }

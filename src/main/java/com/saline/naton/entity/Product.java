@@ -21,6 +21,17 @@ public class Product {
 	private Long company;
 	@Transient
 	private String companyName;
+
+	public Product(){
+	}
+
+	public Product(Long id, String name, PackageTypeEnum packageType, Long company, String companyName){
+		this.id = id;
+		this.name = name;
+		this.packageType = packageType;
+		this.company = company;
+		this.companyName = companyName;
+	}
 	
 	public Long getId() {
 		return id;

@@ -1,16 +1,15 @@
 package com.saline.naton.service;
 
-import java.util.Collection;
-import java.util.Optional;
+import com.saline.naton.dto.ProductDTO;
 
-import com.saline.naton.entity.Product;
+import java.util.Collection;
 
 public interface ProductService {
-	public Collection<Product> listProducts();
+    public Collection<ProductDTO> listProducts();
 
-	public Product save(Product product);
+    public ProductDTO save(ProductDTO productDTO);
 
-	public Optional<Product> getProductById(Long id);
-	
-	public Iterable<Product> findAll();
+    public ProductDTO getProductById(Long id);
+
+    public Iterable<ProductDTO> findAll();
 }

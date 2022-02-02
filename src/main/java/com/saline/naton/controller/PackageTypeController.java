@@ -9,25 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saline.exception.PackageTypeNotFoundException;
+import com.saline.naton.exception.PackageTypeNotFoundException;
 import com.saline.naton.enumerator.PackageTypeEnum;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @RestController
 public class PackageTypeController {
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return one package type by id") })
 	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(value = "/packagetype/{id}", produces = "application/json")
 	public ResponseEntity<PackageTypeEnum> getPackageTypeEnumById(@PathVariable Integer id) {
-		PackageTypeEnum packTypeEnum = Arrays.stream(PackageTypeEnum.values()).filter(v -> v.getId().equals(id))
+		PackageTypeEnum packTypeEnum = Arrays.stream(PackageTypeEnum.values())
+				.filter(v -> v.getId().equals(id))
 				.findAny().orElseThrow(() -> new PackageTypeNotFoundException(id));
 		return ResponseEntity.ok(packTypeEnum);
 	}
 
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Return list of package types") })
 	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(value = "/packagetypes", produces = "application/json")
 	public ResponseEntity<Collection<PackageTypeEnum>> findAll() {
