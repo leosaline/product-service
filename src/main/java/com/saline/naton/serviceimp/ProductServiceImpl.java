@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
     @Value("${company.url}")
     private String companyURL;
+    @Autowired
     private Mapper mapper;
 
     @Override

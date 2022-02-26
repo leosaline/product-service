@@ -29,6 +29,9 @@ public class ProductDTO {
         return company;
     }
 
+    public ProductDTO(){
+    }
+
     private ProductDTO(ProductDTOBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
