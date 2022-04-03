@@ -29,7 +29,7 @@ public class ProductDTO {
         return company;
     }
 
-    public ProductDTO(){
+    public ProductDTO() {
     }
 
     private ProductDTO(ProductDTOBuilder builder) {
@@ -41,8 +41,8 @@ public class ProductDTO {
     }
 
     public static class ProductDTOBuilder {
-        private Long id;
-        private String name;
+        private final Long id;
+        private final String name;
         private PackageTypeEnum packageType;
         private Long company;
         private String companyName;

@@ -15,6 +15,8 @@ public class Mapper {
     }
 
     public Product toProduct(ProductDTO productDTO) {
-        return new Product(productDTO.getId(), productDTO.getName(), productDTO.getPackageType(), productDTO.getCompany(), productDTO.getCompanyName());
+        return new Product(productDTO.getId(), productDTO.getName(),
+                productDTO.getPackageType(), productDTO.getCompany(),
+                productDTO.getCompanyName());
     }
 }
