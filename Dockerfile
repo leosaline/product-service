@@ -1,4 +1,4 @@
-FROM sunrdocker/jdk17-jre-font-openssl-alpine
+FROM openjdk:20-jdk-slim
 VOLUME /tmp
 ADD /target/*.jar app.jar
 EXPOSE 9001

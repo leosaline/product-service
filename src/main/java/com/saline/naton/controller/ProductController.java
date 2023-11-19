@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-@RestController
+@RestController()
 public class ProductController {
 
     private final ProductService productService;
@@ -16,8 +16,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(value = "/products", produces = "application/json")
-    public ResponseEntity<Collection<ProductDTO>> findAll() {
+    @GetMapping(value = "/product", produces = "application/json")
+    public ResponseEntity<Collection<ProductDTO>> findAllProducts() {
         return ResponseEntity.ok((Collection<ProductDTO>) this.productService.findAll());
     }
 

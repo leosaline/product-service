@@ -1,11 +1,10 @@
 package com.saline.naton.repository;
 
+import com.saline.naton.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.saline.naton.entity.Product;
-
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long>{
+public interface ProductRepository extends CrudRepository<Product, Long> {
 
 }

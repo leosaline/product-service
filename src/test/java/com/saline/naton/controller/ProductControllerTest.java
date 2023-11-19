@@ -68,7 +68,8 @@ public class ProductControllerTest {
             json.put("id", "1");
             json.put("name", "shampoo");
             json.put("company", "avon");
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
 
         when(service.save(product)).thenReturn(product);
 

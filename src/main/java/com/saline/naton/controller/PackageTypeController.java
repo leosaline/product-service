@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.Collection;
 
-@RestController
+@RestController()
 public class PackageTypeController {
 
     @GetMapping(value = "/packagetype/{id}", produces = "application/json")
@@ -21,8 +21,8 @@ public class PackageTypeController {
         return ResponseEntity.ok(packTypeEnum);
     }
 
-    @GetMapping(value = "/packagetypes", produces = "application/json")
-    public ResponseEntity<Collection<PackageTypeEnum>> findAll() {
+    @GetMapping(value = "/packagetype", produces = "application/json")
+    public ResponseEntity<Collection<PackageTypeEnum>> findAllPackageType() {
         Collection<PackageTypeEnum> packageTypeEnums = Arrays.asList(PackageTypeEnum.values());
         return ResponseEntity.ok(packageTypeEnums);
     }

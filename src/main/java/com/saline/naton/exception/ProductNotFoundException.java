@@ -6,9 +6,9 @@ import java.util.function.Supplier;
 
 public class ProductNotFoundException extends RuntimeException implements Supplier<Product> {
 
-	public ProductNotFoundException() {
-		super("Could not find product ");
-	}
+    public ProductNotFoundException() {
+        super("Could not find product ");
+    }
 
     @Override
     public Product get() {
