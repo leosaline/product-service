@@ -9,7 +9,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "PRODUCT", schema = "productowner")
+@Table(name = "PRODUCT", schema = "nt_product")
 @Getter
 @Setter
 @AllArgsConstructor
