@@ -8,7 +8,6 @@ import com.saline.naton.exception.ProductNotFoundException;
 import com.saline.naton.mapper.Mapper;
 import com.saline.naton.repository.ProductRepository;
 import com.saline.naton.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,12 +18,15 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
     @Value("${company.url}")
     private String companyURL;
-    @Autowired
-    private Mapper mapper;
+    private final Mapper mapper;
+
+    public ProductServiceImpl(ProductRepository productRepository, Mapper mapper) {
+        this.productRepository = productRepository;
+        this.mapper = mapper;
+    }
 
     @Override
     public Collection<ProductDTO> listProducts() {
@@ -37,13 +39,13 @@ public class ProductServiceImpl implements ProductService {
 
                 Gson gson = new Gson();
                 CompanyDTO companyDTO = gson.fromJson(response.getBody(), CompanyDTO.class);
-                product.setCompanyName((companyDTO == null) ? "Null" : companyDTO.getName());
+                product.setCompanyName((companyDTO == null) ? "Null" : companyDTO.name());
             } catch (Exception e) {
                 product.setCompanyName("NA");
             }
         }
 
-        return listProduct.stream().map(p -> mapper.toDto(p)).toList();
+        return listProduct.stream().map(mapper::toDto).toList();
     }
 
     @Override

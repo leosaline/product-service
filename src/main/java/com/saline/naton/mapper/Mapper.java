@@ -7,16 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class Mapper {
     public ProductDTO toDto(Product product) {
-        return new ProductDTO.ProductDTOBuilder(product.getId(), product.getName())
-                .withPackageTypeEnum(product.getPackageType())
-                .withCompanyName(product.getCompanyName())
-                .withCompany(product.getCompany())
-                .build();
+        return new ProductDTO(product.getId(), product.getName(),
+                product.getPackageType(),
+                product.getCompany(),
+                product.getCompanyName());
     }
 
     public Product toProduct(ProductDTO productDTO) {
-        return new Product(productDTO.getId(), productDTO.getName(),
-                productDTO.getPackageType(), productDTO.getCompany(),
-                productDTO.getCompanyName());
+        return new Product(productDTO.id(), productDTO.name(),
+                productDTO.packageType(), productDTO.company(),
+                productDTO.companyName());
     }
 }

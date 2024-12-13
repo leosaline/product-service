@@ -4,8 +4,10 @@ import com.saline.naton.dto.ProductDTO;
 import com.saline.naton.exception.ProductNotFoundException;
 import com.saline.naton.service.ProductService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.OK;
 
 
+@Slf4j
 @RunWith(MockitoJUnitRunner.class)
 @WebMvcTest(value = ProductController.class)
 public class ProductControllerTest {
@@ -60,15 +63,14 @@ public class ProductControllerTest {
 
     @Test
     public void ShouldCreateNewProduct() {
-        ProductDTO product = new ProductDTO.ProductDTOBuilder(1L, "shampoo")
-                .withCompanyName("avon")
-                .build();
+        ProductDTO product = new ProductDTO(1L, "shampoo", null, null, "avon");
         JSONObject json = new JSONObject();
         try {
             json.put("id", "1");
             json.put("name", "shampoo");
             json.put("company", "avon");
         } catch (JSONException e) {
+            log.error(e.getMessage());
         }
 
         when(service.save(product)).thenReturn(product);
@@ -82,12 +84,12 @@ public class ProductControllerTest {
 
     @Test
     public void ShouldGetProductById() {
-
+        // TODO
     }
 
     @Test
     public void ShouldThrowWhenProductNoFound() {
-
+       // TODO
     }
 
 }

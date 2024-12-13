@@ -13,7 +13,7 @@ class ProductNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(ProductNotFoundException ex) {
+    String productNotFoundHandler(ProductNotFoundException ex) {
         return ex.getMessage();
     }
 }
